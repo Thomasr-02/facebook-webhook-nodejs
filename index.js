@@ -32,8 +32,6 @@ app.post( '/webhook' , ( req , res ) => {
   }
 });
 
-app.get('/teste', (req, res) => {res.send("Funcionando")})
-
 // Adds support for GET requests to our webhook 
 app.get('/webhook',(req,res)=>{   
 
