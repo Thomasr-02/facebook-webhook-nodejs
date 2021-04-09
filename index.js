@@ -17,7 +17,7 @@ app.post( '/webhook' , ( req , res ) => {
   // Checks this is an event from a page subscription 
   if ( body.object==='page') {
       // Iterates over each entry - there may be multiple if batched 
-      console.log("Here:", JSON.stringify(body.entry));
+      console.log("Object received:", JSON.stringify(body.entry));
       body.entry.forEach(function(entry,index){ 
 
         // Gets the message. entry.messaging is an array, but // will only ever contain one message, so we get index 0 
@@ -38,14 +38,14 @@ app.get('/teste', (req, res) => {res.send("Funcionando")})
 app.get('/webhook',(req,res)=>{   
 
   // Your verify token. Should be a random string. 
-  let VERIFY_TOKEN = "EAAELSM0Kr1gBAAVFYHAatsXuOheAFypjPVF1kzU5AVtZCrqNVHxBTv4742qESJhEc6N0diia5SJ3FqZBvZBnfuPCNFnUkZANysQhGDqnZB6QQBJGDS6z9aPKQoJjJh7MO0WBaE1ZAQbLEoaW6q99St0PmLjCM7ZCweAy3dzcLWdzY0wg5jAaWbyGqo1e53FkJAZD" 
+  let VERIFY_TOKEN = process.env.VERIFY_TOKEN;
     
   // Parse the query params 
   let mode =req.query['hub.mode']; 
   let token =req.query['hub.verify_token']; 
   let challenge =req.query['hub.challenge'];
-  console.log("GET REQ:", JSON.stringify(JSON.stringify(req)));
-  console.log("GET RES:", JSON.stringify(JSON.stringify(res)));
+  console.log("REQ:", JSON.stringify(JSON.stringify(req)));
+  console.log("RES:", JSON.stringify(JSON.stringify(res)));
   // Checks if a token and mode is in the query string of the request 
   if ( mode && token ) {
     // Checks the mode and token sent is correct 
